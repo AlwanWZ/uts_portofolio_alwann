@@ -20,10 +20,10 @@ export default function Page() {
   const [isGeminiOpen, setIsGeminiOpen] = useState(false);
 
   const handleSectionClick = (section: string) => {
-    setActiveSection(section);
     const element = document.getElementById(section);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(section); 
     }
   };
 
@@ -43,11 +43,10 @@ export default function Page() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Navbar */}
-        <Navbar
+            <Navbar
           sections={sections}
           activeSection={activeSection}
-          setActiveSection={handleSectionClick}
+          setActiveSection={setActiveSection}
           isDarkMode={isDarkMode}
         />
 
@@ -63,22 +62,21 @@ export default function Page() {
           {isDarkMode ? '🌞' : '🌙'}
         </motion.button>
 
-        {/* Sections */}
-        {sections.map((section) => (
-          <section
-            key={section}
-            id={section}
-            className={`min-h-screen flex flex-col items-center justify-center px-6 py-20 ${
-              section !== 'Beranda' ? 'pt-28' : ''
-            }`}
-          >
-            {section === 'Beranda' && <Hero isDarkMode={isDarkMode} handleSectionClick={handleSectionClick} />}
-            {section === 'Tentang' && <About isDarkMode={isDarkMode} />}
-            {section === 'Skills' && <Skill isDarkMode={isDarkMode} />}
-            {section === 'Portfolio' && <Portfolio isDarkMode={isDarkMode} />}
-            {section === 'Kontak' && <Kontak isDarkMode={isDarkMode} />}
-          </section>
-        ))}
+              {sections.map((section) => (
+        <section
+          key={section}
+          id={section} 
+          className={`min-h-screen flex flex-col items-center justify-center px-6 py-20 ${
+            section !== 'Beranda' ? 'pt-28' : ''
+          }`}
+        >
+          {section === 'Beranda' && <Hero isDarkMode={isDarkMode} handleSectionClick={handleSectionClick} />}
+          {section === 'Tentang' && <About isDarkMode={isDarkMode} />}
+          {section === 'Skills' && <Skill isDarkMode={isDarkMode} />}
+          {section === 'Portfolio' && <Portfolio isDarkMode={isDarkMode} />}
+          {section === 'Kontak' && <Kontak isDarkMode={isDarkMode} />}
+        </section>
+      ))}
 
         {/* Rating Section */}
         <section id="rating" className="py-20">
