@@ -13,16 +13,51 @@ interface NavbarProps {
 export default function Navbar({ sections, activeSection, setActiveSection, isDarkMode }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
+
   const handleScrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setActiveSection(sectionId);
+    const sectionElement = document.getElementById(sectionId);
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(sectionId); 
+    }
   };
+
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6, 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          setActiveSection(sectionId);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      const sectionElement = document.getElementById(section);
+      if (sectionElement) observer.observe(sectionElement);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        const sectionElement = document.getElementById(section);
+        if (sectionElement) observer.unobserve(sectionElement);
+      });
+    };
+  }, [sections, setActiveSection]);
 
   return (
     <motion.nav
@@ -35,7 +70,7 @@ export default function Navbar({ sections, activeSection, setActiveSection, isDa
         <motion.button
           key={section}
           className={`px-4 py-2 rounded-lg font-medium transition-all ${
-            activeSection === section ? 'bg-blue-500 scale-105' : 'hover:bg-gray-700'
+            activeSection === section ? 'bg-blue-500 text-white scale-105' : 'text-gray-300 hover:bg-gray-700'
           }`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
