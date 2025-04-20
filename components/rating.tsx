@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, serverTimestamp, getDocs, query, orderBy, limit } from 'firebase/firestore';
-import { db } from '../lib/firebase'; // Impor Firestore
+import { db } from '../lib/firebase';
 
 interface RatingProps {
   productName?: string;
@@ -9,14 +9,14 @@ interface RatingProps {
 interface ReviewData {
   id: string;
   productName: string;
-  name: string; // Tambahkan nama
+  name: string;
   rating: number;
   review: string;
   createdAt: any;
 }
 
 const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => {
-  const [name, setName] = useState<string>(''); // State untuk nama
+  const [name, setName] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
   const [review, setReview] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -67,29 +67,24 @@ const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => 
     setIsSubmitting(true);
 
     try {
-      // Data rating yang akan disimpan
       const ratingData = {
         productName,
-        name, // Sertakan nama
+        name,
         rating,
         review,
         createdAt: serverTimestamp(),
       };
 
-      // Simpan data ke koleksi "ratings" di Firestore
       const ratingsRef = collection(db, 'ratings');
       await addDoc(ratingsRef, ratingData);
 
-      // Reset form and show thank you message
       setName('');
       setReview('');
       setRating(0);
       setShowThankYou(true);
 
-      // Refresh reviews
       fetchRecentReviews();
 
-      // Hide thank you message after 3 seconds
       setTimeout(() => {
         setShowThankYou(false);
       }, 3000);
@@ -101,7 +96,6 @@ const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => 
     }
   };
 
-  // Function to render stars for a given rating
   const renderStars = (value: number, interactive = false) => {
     return [1, 2, 3, 4, 5].map((star) => (
       <svg
@@ -125,7 +119,9 @@ const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => 
           {/* Rating Form Section */}
           <div className="md:w-1/2 p-4 md:p-6">
             <div className="bg-[#1a2233] rounded-lg shadow-md p-4 md:p-6 border border-gray-700">
-              <h3 className="text-lg md:text-xl font-bold mb-4 text-blue-400">Rate {productName}</h3>
+            <h3 className="text-lg md:text-xl font-bold mb-4 text-blue-400 text-center">
+              Rate {productName}
+            </h3>
 
               {showThankYou ? (
                 <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4 text-center mb-4">
@@ -133,6 +129,14 @@ const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => 
                 </div>
               ) : null}
 
+              {/* Render Stars */}
+              <div className="flex justify-center mb-4">{renderStars(rating, true)}</div>
+
+              <div className="text-center mb-4 text-gray-300">
+                {rating > 0 ? `Your rating: ${rating} stars` : 'Select your rating'}
+              </div>
+
+              {/* Input for Name */}
               <input
                 type="text"
                 value={name}
@@ -141,12 +145,7 @@ const StarRating: React.FC<RatingProps> = ({ productName = 'this product' }) => 
                 className="w-full p-3 bg-[#131d2e] border border-gray-700 rounded-md mb-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-200"
               />
 
-              <div className="flex justify-center mb-4">{renderStars(rating, true)}</div>
-
-              <div className="text-center mb-4 text-gray-300">
-                {rating > 0 ? `Your rating: ${rating} stars` : 'Select your rating'}
-              </div>
-
+              {/* Textarea for Review */}
               <textarea
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
