@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode = true }) => {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/AlwanWZ"
               target="_blank"
               rel="noopener noreferrer"
               className={`p-2 rounded-full transition-all duration-300 ${
