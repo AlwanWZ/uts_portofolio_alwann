@@ -43,7 +43,8 @@ export default function Page() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-            <Navbar
+        {/* Navbar */}
+        <Navbar
           sections={sections}
           activeSection={activeSection}
           setActiveSection={setActiveSection}
@@ -62,26 +63,33 @@ export default function Page() {
           {isDarkMode ? '🌞' : '🌙'}
         </motion.button>
 
-              {sections.map((section) => (
-        <section
-          key={section}
-          id={section} 
-          className={`min-h-screen flex flex-col items-center justify-center px-6 py-20 ${
-            section !== 'Beranda' ? 'pt-28' : ''
-          }`}
-        >
-          {section === 'Beranda' && <Hero isDarkMode={isDarkMode} handleSectionClick={handleSectionClick} />}
-          {section === 'Tentang' && <About isDarkMode={isDarkMode} />}
-          {section === 'Skills' && <Skill isDarkMode={isDarkMode} />}
-          {section === 'Portfolio' && <Portfolio isDarkMode={isDarkMode} />}
-          {section === 'Kontak' && <Kontak isDarkMode={isDarkMode} />}
-        </section>
-      ))}
+        {/* Sections */}
+        {sections.map((section) => (
+          <section
+            key={section}
+            id={section} 
+            className={`min-h-screen flex flex-col items-center justify-center px-6 py-20 ${
+              section !== 'Beranda' ? 'pt-28' : ''
+            }`}
+          >
+            {section === 'Beranda' && <Hero isDarkMode={isDarkMode} handleSectionClick={handleSectionClick} />}
+            {section === 'Tentang' && <About isDarkMode={isDarkMode} />}
+            {section === 'Skills' && <Skill isDarkMode={isDarkMode} />}
+            {section === 'Portfolio' && <Portfolio isDarkMode={isDarkMode} />}
+            {section === 'Kontak' && <Kontak isDarkMode={isDarkMode} />}
+          </section>
+        ))}
 
         {/* Rating Section */}
         <section id="rating" className="py-20">
-          <h2 className="text-3xl font-bold mb-6 text-center">Rating System</h2>
-          <StarRating productName="Awesome Product" />
+          <h2
+            className={`text-3xl font-bold mb-6 text-center ${
+              isDarkMode ? 'text-blue-400' : 'text-blue-600'
+            }`}
+          >
+            Rating System
+          </h2>
+          <StarRating productName="Awesome Product" isDarkMode={isDarkMode} />
         </section>
 
         {/* Footer */}
