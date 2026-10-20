@@ -17,7 +17,16 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Gagal mendapatkan respons dari Gemini:', errorText);
-      return NextResponse.json({ error: 'Gagal mendapatkan respons dari Gemini.' }, { status: 500 });
+      let errorMsg = 'Gagal mendapatkan respons dari Gemini API.';
+      try {
+        const parsed = JSON.parse(errorText);
+        if (parsed.error?.message) {
+          errorMsg = parsed.error.message;
+        }
+      } catch {
+        errorMsg = errorText || errorMsg;
+      }
+      return NextResponse.json({ error: errorMsg }, { status: response.status || 500 });
     }
     
     // Return the response stream directly to the client
@@ -30,6 +39,9 @@ export async function POST(req: NextRequest) {
     });
   } catch (error: any) {
     console.error('Error di /api/gemini:', error.message || error);
-    return NextResponse.json({ error: 'Terjadi kesalahan di server.' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Terjadi kesalahan di server.' }, 
+      { status: 500 }
+    );
   }
 }

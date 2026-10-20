@@ -20,6 +20,7 @@ const Kontak = dynamic(() => import('../components/kontak'), {
   loading: () => <div className="min-h-[400px]" />,
 });
 const StarRating = dynamic(() => import('../components/rating'), {
+  ssr: false,
   loading: () => <div className="min-h-[250px]" />,
 });
 const Gemini = dynamic(() => import('../components/gemini'), {

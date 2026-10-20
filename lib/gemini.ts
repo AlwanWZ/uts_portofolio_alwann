@@ -5,11 +5,11 @@ export async function generateGeminiStream(prompt: string): Promise<Response> {
   
   if (!API_KEY) {
     console.error('GEMINI_API_KEY tidak ditemukan di environment variables.');
-    throw new Error('API key tidak dikonfigurasi');
+    throw new Error('GEMINI_API_KEY belum dikonfigurasi di Environment Variables Vercel.');
   }
   
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:streamGenerateContent?alt=sse&key=${API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${API_KEY}`,
     {
       method: 'POST',
       headers: {
