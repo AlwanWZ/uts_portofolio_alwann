@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
 
 const testimonials = [
@@ -38,16 +40,16 @@ export default function Kontak({ isDarkMode }: { isDarkMode: boolean }) {
       className="w-full max-w-6xl"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: false, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.15 }}
     >
         
       <motion.h2
         className={`text-4xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: false }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true }}
       >
         Kontak
       </motion.h2>
@@ -56,69 +58,93 @@ export default function Kontak({ isDarkMode }: { isDarkMode: boolean }) {
         initial={{ width: 0 }}
         whileInView={{ width: 80 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+        {/* Left Column: Contact Info & Testimonial Card */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          className={`backdrop-blur-xl p-6 sm:p-8 rounded-2xl border flex flex-col justify-between h-full transition-[border-color,box-shadow,background-color] duration-300 hover:border-blue-500/20 ${
+            isDarkMode 
+              ? 'bg-gray-900/40 border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]' 
+              : 'bg-white/60 border-black/[0.05] shadow-[0_8px_32px_0_rgba(31,38,135,0.05)]'
+          }`}
+          initial={{ opacity: 0, x: -25 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
         >
-          <motion.p
-            className={`text-lg mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: false }}
-          >
-            Tertarik untuk bekerja sama? Jangan ragu untuk menghubungi saya melalui form di bawah ini atau melalui kanal media sosial saya.
-          </motion.p>
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: false }}
-          >
-            <motion.div
-              className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-6 rounded-xl shadow-lg`}
-              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.4)" }}
-            >
-              <FaEnvelope className="text-blue-500 w-6 h-6 mb-3" />
-              <h3 className={`text-lg font-medium mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Email</h3>
-              <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>alwan@example.com</p>
-            </motion.div>
-            <motion.div
-              className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-6 rounded-xl shadow-lg`}
-              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.4)" }}
-            >
-              <FaLinkedin className="text-blue-500 w-6 h-6 mb-3" />
-              <h3 className={`text-lg font-medium mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>LinkedIn</h3>
-              <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>linkedin.com/in/alwan</p>
-            </motion.div>
-          </motion.div>
-          <motion.div
-            className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-6 rounded-xl shadow-lg mb-8`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            viewport={{ once: false }}
-          >
-            <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Testimonials</h3>
-            <div className="relative h-48 overflow-hidden">
+          <div>
+            <h3 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Mari Terhubung
+            </h3>
+            <p className={`text-sm sm:text-base leading-relaxed mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              Tertarik untuk bekerja sama? Jangan ragu untuk menghubungi saya melalui form pesan atau melalui kanal kontak di bawah ini.
+            </p>
+            
+            {/* Minimal Contact List */}
+            <div className="space-y-4 mb-8">
+              <a href="https://wa.me/62895320695308" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 rounded-xl hover:bg-emerald-500/10 transition-colors duration-200 group">
+                <div className="bg-emerald-500/10 p-3 rounded-xl text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-200">
+                  <FaWhatsapp className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className={`text-[10px] font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} uppercase tracking-wider`}>WhatsApp</div>
+                  <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>+62 895-3206-95308</div>
+                </div>
+              </a>
+
+              <a href="mailto:alwanwildan942@gmail.com" className="flex items-center gap-4 p-3 rounded-xl hover:bg-blue-500/10 transition-colors duration-200 group">
+                <div className="bg-blue-500/10 p-3 rounded-xl text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors duration-200">
+                  <FaEnvelope className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className={`text-[10px] font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} uppercase tracking-wider`}>Email</div>
+                  <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>alwanwildan942@gmail.com</div>
+                </div>
+              </a>
+              
+              <a href="https://linkedin.com/in/alwan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 rounded-xl hover:bg-blue-500/10 transition-colors duration-200 group">
+                <div className="bg-blue-500/10 p-3 rounded-xl text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors duration-200">
+                  <FaLinkedin className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className={`text-[10px] font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} uppercase tracking-wider`}>LinkedIn</div>
+                  <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>linkedin.com/in/alwan</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/AlwanWZ" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-3 rounded-xl hover:bg-blue-500/10 transition-colors duration-200 group">
+                <div className="bg-blue-500/10 p-3 rounded-xl text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors duration-200">
+                  <FaGithub className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className={`text-[10px] font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} uppercase tracking-wider`}>GitHub</div>
+                  <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>github.com/AlwanWZ</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          {/* Testimonial Section inside the same card, aligned to bottom */}
+          <div className={`border-t pt-6 ${isDarkMode ? 'border-gray-800/80' : 'border-gray-200/50'}`}>
+            <h4 className={`text-xs font-bold uppercase tracking-wider mb-4 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+              Testimonials
+            </h4>
+            <div className="relative h-32 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentTestimonial}
-                  className="absolute inset-0 flex flex-col"
-                  initial={{ opacity: 0, x: 50 }}
+                  className="absolute inset-0 flex flex-col justify-between"
+                  initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className={`text-sm italic mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>"{testimonials[currentTestimonial].content}"</p>
-                  <div className="mt-auto flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gray-300 mr-3 relative overflow-hidden">
+                  <p className={`text-sm italic line-clamp-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
+                    "{testimonials[currentTestimonial].content}"
+                  </p>
+                  <div className="flex items-center mt-3">
+                    <div className="w-9 h-9 rounded-full bg-gray-300 mr-3 relative overflow-hidden flex-shrink-0">
                       <Image
                         src={testimonials[currentTestimonial].avatar}
                         alt={testimonials[currentTestimonial].name}
@@ -127,113 +153,103 @@ export default function Kontak({ isDarkMode }: { isDarkMode: boolean }) {
                       />
                     </div>
                     <div>
-                      <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{testimonials[currentTestimonial].name}</p>
-                      <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{testimonials[currentTestimonial].role}, {testimonials[currentTestimonial].company}</p>
+                      <p className={`text-xs font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{testimonials[currentTestimonial].name}</p>
+                      <p className={`text-[10px] ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{testimonials[currentTestimonial].role}, {testimonials[currentTestimonial].company}</p>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-3">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
-                  className={`w-2 h-2 rounded-full mx-1 ${currentTestimonial === i ? 'bg-blue-500' : isDarkMode ? 'bg-gray-600' : 'bg-gray-300'}`}
+                  className={`h-1.5 rounded-full mx-1 transition-all duration-300 cursor-pointer ${currentTestimonial === i ? 'bg-blue-500 w-4' : isDarkMode ? 'bg-gray-700 w-1.5' : 'bg-gray-300 w-1.5'}`}
                   onClick={() => setCurrentTestimonial(i)}
                 />
               ))}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
+
+        {/* Right Column: Message Form Card */}
         <motion.div
-          className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-8 rounded-xl shadow-xl`}
-          initial={{ opacity: 0, x: 30 }}
+          className={`backdrop-blur-xl p-6 sm:p-8 rounded-2xl border flex flex-col justify-between h-full transition-[border-color,box-shadow,background-color] duration-300 hover:border-blue-500/20 ${
+            isDarkMode 
+              ? 'bg-gray-900/40 border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]' 
+              : 'bg-white/60 border-black/[0.05] shadow-[0_8px_32px_0_rgba(31,38,135,0.05)]'
+          }`}
+          initial={{ opacity: 0, x: 25 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
         >
-          <h3 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Kirim Pesan</h3>
-          <form className="space-y-4">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-              viewport={{ once: false }}
-            >
-              <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Nama</label>
-              <input
-                type="text"
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDarkMode
-                    ? 'bg-gray-700 text-white border-gray-600 focus:border-blue-500'
-                    : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-                } border focus:ring-2 focus:ring-blue-500/30 outline-none transition-all`}
-                placeholder="Nama Lengkap"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 }}
-              viewport={{ once: false }}
-            >
-              <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
-              <input
-                type="email"
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDarkMode
-                    ? 'bg-gray-700 text-white border-gray-600 focus:border-blue-500'
-                    : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-                } border focus:ring-2 focus:ring-blue-500/30 outline-none transition-all`}
-                placeholder="email@example.com"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.5 }}
-              viewport={{ once: false }}
-            >
-              <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Subjek</label>
-              <input
-                type="text"
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDarkMode
-                    ? 'bg-gray-700 text-white border-gray-600 focus:border-blue-500'
-                    : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-                } border focus:ring-2 focus:ring-blue-500/30 outline-none transition-all`}
-                placeholder="Apa yang bisa saya bantu?"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.6 }}
-              viewport={{ once: false }}
-            >
-              <label className={`block text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Pesan</label>
-              <textarea
-                className={`w-full px-4 py-3 rounded-lg ${
-                  isDarkMode
-                    ? 'bg-gray-700 text-white border-gray-600 focus:border-blue-500'
-                    : 'bg-white text-gray-900 border-gray-300 focus:border-blue-500'
-                } border focus:ring-2 focus:ring-blue-500/30 outline-none transition-all`}
-                rows={5}
-                placeholder="Tulis pesan anda disini..."
-              ></textarea>
-            </motion.div>
-            <motion.button
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-blue-500/30 transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.7 }}
-              viewport={{ once: false }}
-            >
-              Kirim Pesan
-            </motion.button>
-          </form>
+          <div className="w-full">
+            <h3 className={`text-xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Kirim Pesan</h3>
+            <form className="space-y-3 sm:space-y-4">
+              <div>
+                <label className={`hidden sm:block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Nama</label>
+                <input
+                  type="text"
+                  className={`w-full p-3 sm:p-3.5 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all border ${
+                    isDarkMode
+                      ? 'bg-gray-950/50 border-gray-800 text-gray-200 placeholder-gray-600'
+                      : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 shadow-inner'
+                  }`}
+                  placeholder="Nama Lengkap"
+                />
+              </div>
+              
+              <div>
+                <label className={`hidden sm:block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Email</label>
+                <input
+                  type="email"
+                  className={`w-full p-3 sm:p-3.5 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all border ${
+                    isDarkMode
+                      ? 'bg-gray-950/50 border-gray-800 text-gray-200 placeholder-gray-600'
+                      : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 shadow-inner'
+                  }`}
+                  placeholder="Email Anda"
+                />
+              </div>
+
+              <div>
+                <label className={`hidden sm:block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Subjek</label>
+                <input
+                  type="text"
+                  className={`w-full p-3 sm:p-3.5 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all border ${
+                    isDarkMode
+                      ? 'bg-gray-950/50 border-gray-800 text-gray-200 placeholder-gray-600'
+                      : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 shadow-inner'
+                  }`}
+                  placeholder="Subjek Pesan"
+                />
+              </div>
+
+              <div>
+                <label className={`hidden sm:block text-xs font-bold uppercase tracking-wider mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Pesan</label>
+                <textarea
+                  className={`w-full p-3 sm:p-3.5 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all border ${
+                    isDarkMode
+                      ? 'bg-gray-950/50 border-gray-800 text-gray-200 placeholder-gray-600'
+                      : 'bg-white border-gray-200 text-gray-800 placeholder-gray-400 shadow-inner'
+                  }`}
+                  rows={3}
+                  placeholder="Tulis pesan Anda di sini..."
+                ></textarea>
+              </div>
+
+              <motion.button
+                type="button"
+                className="w-full py-3 sm:py-3.5 px-4 rounded-xl font-bold text-sm tracking-wider uppercase bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-[0_4px_15px_rgba(59,130,246,0.2)] hover:shadow-[0_4px_20px_rgba(59,130,246,0.35)] transition-colors duration-200 cursor-pointer"
+                whileHover={{ scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              >
+                Kirim Pesan
+              </motion.button>
+            </form>
+          </div>
         </motion.div>
       </div>
     </motion.div>

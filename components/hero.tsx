@@ -1,154 +1,108 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { SiGithub } from 'react-icons/si';
 
 export default function Hero({ isDarkMode, handleSectionClick }: { isDarkMode: boolean; handleSectionClick: (section: string) => void }) {
+  const badgePositions = [
+    { name: 'React', pos: 'top-4 -left-4 sm:-left-8' },
+    { name: 'HTML', pos: 'top-8 -right-4 sm:-right-8' },
+    { name: 'PHP', pos: 'bottom-8 -left-4 sm:-left-8' },
+    { name: 'UI/UX', pos: 'bottom-4 -right-4 sm:-right-8' },
+  ];
+
   return (
-    <motion.div
-      className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-12"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-12">
       {/* Bagian Beranda */}
-      <motion.div
-        className="flex-1 text-left"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      >
-        <motion.span
-          className={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6 ${
-            isDarkMode ? 'bg-blue-600 bg-opacity-20 text-blue-300' : 'bg-blue-100 text-blue-800'
-          }`}
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 500, delay: 0.5 }}
-        >
-          Halo, Saya
-        </motion.span>
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-wide mb-4">
+      <div className="flex-1 text-left w-full max-w-full overflow-hidden">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight sm:tracking-wide mb-2 sm:mb-4 flex flex-wrap gap-x-3 gap-y-1">
           <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>Alwan</span>
-          <span className="text-blue-500 ml-4">Portfolio</span>
+          <span className="text-blue-500">Portfolio</span>
         </h1>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <p className={`text-xl mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-            Mahasiswa Sistem Informasi A - Semester 4
+        <div>
+          <p className={`text-base sm:text-xl mb-4 sm:mb-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} font-medium`}>
+            Mahasiswa Sistem Informasi - Semester 7 (Tingkat Akhir)
           </p>
-          <p className={`text-lg max-w-xl mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-lg max-w-xl mb-6 sm:mb-8 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} leading-relaxed`}>
             Saya seorang pengembang web yang bersemangat dan fokus pada membuat aplikasi modern dengan UI/UX yang cantik dan fungsionalitas yang kuat.
           </p>
-        </motion.div>
-        <motion.div
-          className="flex gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
+        </div>
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
           <motion.button
-            className={`px-6 py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all`}
+            className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-colors duration-200 text-sm sm:text-base cursor-pointer`}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             onClick={() => handleSectionClick('Portfolio')}
           >
             Lihat Portfolio
           </motion.button>
           <motion.button
-            className={`px-6 py-3 rounded-lg border ${
+            className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg border ${
               isDarkMode
                 ? 'border-gray-500 text-gray-300 hover:bg-gray-800'
                 : 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            } font-medium transition-all`}
+            } font-medium transition-colors duration-200 text-sm sm:text-base cursor-pointer`}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             onClick={() => handleSectionClick('Kontak')}
           >
             Hubungi Saya
           </motion.button>
-        </motion.div>
-      </motion.div>
+          <motion.a
+            href="https://github.com/AlwanWZ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`p-2.5 sm:p-3 rounded-lg border transition-colors duration-200 flex items-center justify-center cursor-pointer ${
+              isDarkMode
+                ? 'border-gray-700 bg-gray-900/60 text-gray-300 hover:text-white hover:border-blue-500'
+                : 'border-gray-300 bg-white text-gray-700 hover:text-gray-950 hover:border-blue-500'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            aria-label="GitHub AlwanWZ"
+            title="GitHub: https://github.com/AlwanWZ"
+          >
+            <SiGithub className="w-5 h-5 sm:w-6 sm:h-6" />
+          </motion.a>
+        </div>
+      </div>
 
       {/* Bagian Gambar */}
-      <motion.div
-        className="flex-1 flex justify-center items-center relative"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
+      <div className="flex-grow-0 flex-shrink-0 flex justify-center items-center relative">
         <motion.div
-          className="w-64 h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden border-4 border-blue-500 shadow-xl shadow-blue-600/20 z-10"
-          whileHover={{ scale: 1.05 }}
-          animate={{
-            y: [0, -10, 0],
-            boxShadow: [
-              '0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1)',
-              '0 25px 50px -12px rgba(59, 130, 246, 0.4)',
-              '0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1)',
-            ],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 4,
-          }}
+          className="w-40 h-40 sm:w-64 sm:h-64 md:w-80 md:h-80 relative rounded-full overflow-hidden border-4 border-blue-500 shadow-2xl shadow-blue-500/20 z-10 animate-float-gentle"
+          whileHover={{ scale: 1.03 }}
         >
           <Image
             src="/profile.jpg"
             alt="Profile Picture"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-full"
+            fill
+            priority
+            unoptimized
+            sizes="(max-width: 640px) 160px, (max-width: 768px) 256px, 320px"
+            className="rounded-full object-cover"
           />
         </motion.div>
-        <motion.div
-          className="absolute inset-0 rounded-full bg-blue-500 opacity-20 blur-3xl z-0"
-          animate={{
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 4,
-          }}
-        />
-        {/* Floating skill badges around profile */}
-        {['React', 'HTML', 'PHP', 'UI/UX'].map((skill, i) => (
-          <motion.div
-            key={skill}
-            className={`absolute ${
-              isDarkMode ? 'bg-gray-800' : 'bg-white'
-            } rounded-full py-2 px-4 shadow-lg text-sm font-medium ${
+        <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-xl z-0 pointer-events-none" />
+        {/* Floating skill badges around profile with GPU-only transforms */}
+        {badgePositions.map((badge, i) => (
+          <div
+            key={badge.name}
+            className={`absolute hidden sm:block ${badge.pos} animate-badge-${i + 1} ${
+              isDarkMode ? 'bg-gray-850/90 bg-gray-900 border-gray-700' : 'bg-white/90 border-gray-200'
+            } border rounded-full py-1.5 px-3.5 shadow-lg text-xs font-semibold ${
               isDarkMode ? 'text-blue-400' : 'text-blue-600'
-            } z-20`}
-            initial={{
-              x: (i % 2 === 0 ? -120 : 120) * Math.sin(i * 0.5),
-              y: (i % 2 === 0 ? -120 : 120) * Math.cos(i * 0.5),
-              opacity: 0,
-            }}
-            animate={{
-              x: [
-                (i % 2 === 0 ? -120 : 120) * Math.sin(i * 0.5 + 1),
-                (i % 2 === 0 ? -130 : 130) * Math.sin(i * 0.5),
-              ],
-              y: [
-                (i % 2 === 0 ? -120 : 120) * Math.cos(i * 0.5 + 1),
-                (i % 2 === 0 ? -130 : 130) * Math.cos(i * 0.5),
-              ],
-              opacity: 1,
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: 'reverse',
-              duration: 3 + i,
-              delay: i * 0.3,
-            }}
+            } z-20 pointer-events-none`}
           >
-            {skill}
-          </motion.div>
+            {badge.name}
+          </div>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

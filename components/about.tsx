@@ -1,6 +1,7 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { HiOutlineChevronDown } from 'react-icons/hi';
 
 export default function About({ isDarkMode }: { isDarkMode: boolean }) {
   return (
@@ -8,15 +9,15 @@ export default function About({ isDarkMode }: { isDarkMode: boolean }) {
       className="w-full max-w-6xl"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: false, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
       <motion.h2
         className={`text-4xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       >
         Tentang Saya
       </motion.h2>
@@ -25,81 +26,105 @@ export default function About({ isDarkMode }: { isDarkMode: boolean }) {
         initial={{ width: 0 }}
         whileInView={{ width: 80 }}
         transition={{ duration: 0.5 }}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         <motion.div
-          className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-8 rounded-2xl shadow-xl`}
-          initial={{ opacity: 0, x: -30 }}
+          className={`backdrop-blur-xl p-5 sm:p-8 rounded-2xl border shadow-xl transition-[border-color,box-shadow,background-color] duration-300 hover:border-blue-500/20 ${
+            isDarkMode 
+              ? 'bg-gray-900/40 border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]' 
+              : 'bg-white/60 border-black/[0.05] shadow-[0_8px_32px_0_rgba(31,38,135,0.05)]'
+          }`}
+          initial={{ opacity: 0, x: -25 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
         >
           <motion.p
-            className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-6`}
+            className={`text-sm sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-6`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Nama saya Alwan, lahir di Lampung pada 11 Juni 2005. Saat ini, saya adalah mahasiswa tingkat akhir (semester 7) di Program Studi Sistem Informasi, Universitas Masoem.
+          </motion.p>
+          <motion.p
+            className={`text-sm sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-6`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
           >
-            Nama saya Alwan, lahir di Lampung pada 11 Juni 2005. Saya seorang mahasiswa semester 4 di Program Studi Sistem Informasi A.
+            Saya memiliki passion yang mendalam dalam pengembangan web full-stack dan desain UI/UX. Saya sangat menikmati proses menciptakan interface yang intuitif, estetis, dan fungsional yang memberikan pengalaman terbaik bagi pengguna.
           </motion.p>
           <motion.p
-            className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-6`}
+            className={`text-sm sm:text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
           >
-            Saya memiliki passion dalam pengembangan web dan desain UI/UX. Menciptakan interface yang intuitif dan mudah digunakan adalah hal yang saya sukai.
-          </motion.p>
-          <motion.p
-            className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed`}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            viewport={{ once: false }}
-          >
-            Saat ini saya fokus mengembangkan kemampuan di bidang front-end development dengan React dan Next.js, serta mempelajari teknologi back-end seperti Node.js dan PHP.
+            Fokus utama saya saat ini adalah mengembangkan aplikasi web modern berskala produksi menggunakan ekosistem React (Next.js), integrasi backend (Node.js, PHP, Firebase), serta pengelolaan database. Sebagai mahasiswa semester akhir, saya juga aktif mempersiapkan penelitian tugas akhir dan terbuka untuk kesempatan magang maupun kolaborasi profesional.
           </motion.p>
         </motion.div>
         <motion.div
-          className={`${isDarkMode ? 'bg-gray-800 bg-opacity-50' : 'bg-white bg-opacity-70'} backdrop-blur-lg p-8 rounded-2xl shadow-xl`}
-          initial={{ opacity: 0, x: 30 }}
+          className={`backdrop-blur-xl p-5 sm:p-8 rounded-2xl border shadow-xl transition-[border-color,box-shadow,background-color] duration-300 hover:border-blue-500/20 ${
+            isDarkMode 
+              ? 'bg-gray-900/40 border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]' 
+              : 'bg-white/60 border-black/[0.05] shadow-[0_8px_32px_0_rgba(31,38,135,0.05)]'
+          }`}
+          initial={{ opacity: 0, x: 25 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
         >
           <motion.h3
             className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
           >
             Hobi & Minat
           </motion.h3>
-          <div className="grid grid-cols-2 gap-4">
-            {['Bermain Basket', 'Membaca Komik', 'Mengambar', 'Riding', 'Bermain Game', 'UI/UX Design'].map((hobby, i) => (
-              <motion.div
+          <div className="flex flex-wrap gap-2">
+            {[
+              'Bermain Basket',
+              'Membaca Komik & Manga',
+              'Creating & DIY Projects',
+              'Menggambar & Sketsa',
+              'UI/UX & Web Design',
+              'Desain Grafis (Poster, Banner, Logo)',
+              '3D Maps & Desain Geospasial',
+              'Mendengarkan Musik',
+            ].map((hobby, i) => (
+              <motion.span
                 key={hobby}
-                className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 + i * 0.1 }}
-                viewport={{ once: false }}
+                className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors duration-200 cursor-default ${
+                  isDarkMode 
+                    ? 'bg-gray-900/40 border-gray-800 text-gray-300 hover:border-blue-500/40 hover:text-blue-300' 
+                    : 'bg-white/80 border-gray-200 text-gray-700 hover:border-blue-500/40 hover:text-blue-600 shadow-sm'
+                }`}
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ 
+                  scale: { type: 'spring', stiffness: 400, damping: 20 },
+                  opacity: { duration: 0.4, delay: 0.04 + i * 0.025, ease: [0.16, 1, 0.3, 1] }
+                }}
+                viewport={{ once: true }}
               >
-                <div className="w-2 h-2 rounded-full bg-blue-500" />
-                <span>{hobby}</span>
-              </motion.div>
+                {hobby}
+              </motion.span>
             ))}
           </div>
           <motion.h3
-            className={`text-xl font-bold mt-8 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+            className={`text-xl font-bold mt-6 sm:mt-8 mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
           >
             Pendidikan
           </motion.h3>
@@ -107,8 +132,8 @@ export default function About({ isDarkMode }: { isDarkMode: boolean }) {
             className={`mb-4 pb-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.4 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
           >
             <div className={`text-base font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Sistem Informasi</div>
             <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Universitas Masoem</div>
@@ -117,8 +142,8 @@ export default function About({ isDarkMode }: { isDarkMode: boolean }) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
           >
             <div className={`text-base font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SMK Bakti Ilham</div>
             <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Jurusan TKJ</div>
@@ -126,15 +151,6 @@ export default function About({ isDarkMode }: { isDarkMode: boolean }) {
           </motion.div>
         </motion.div>
       </div>
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-      >
-        <p className={`text-sm mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Scroll Down</p>
-        <HiOutlineChevronDown className={`w-6 h-6 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} />
-      </motion.div>
     </motion.div>
   );
 }

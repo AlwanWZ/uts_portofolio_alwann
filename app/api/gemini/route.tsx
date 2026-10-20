@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateGeminiResponse } from '@/lib/gemini'; 
+import { generateGeminiStream } from '@/lib/gemini'; 
 
 export async function POST(req: NextRequest) {
   try { 
@@ -12,15 +12,22 @@ export async function POST(req: NextRequest) {
 
     console.log('Menerima prompt:', prompt);
 
-    const response = await generateGeminiResponse(prompt);
+    const response = await generateGeminiStream(prompt);
 
-    if (response) {
-      console.log('Respons dari Gemini:', response);
-      return NextResponse.json({ response });
-    } else {
-      console.error('Gagal mendapatkan respons dari Gemini.');
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Gagal mendapatkan respons dari Gemini:', errorText);
       return NextResponse.json({ error: 'Gagal mendapatkan respons dari Gemini.' }, { status: 500 });
     }
+    
+    // Return the response stream directly to the client
+    return new NextResponse(response.body, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    });
   } catch (error: any) {
     console.error('Error di /api/gemini:', error.message || error);
     return NextResponse.json({ error: 'Terjadi kesalahan di server.' }, { status: 500 });
